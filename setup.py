@@ -1,6 +1,7 @@
 # Copyright (c) 2023, Tri Dao.
 
 import sys
+import sysconfig
 import functools
 import importlib.util
 import warnings
@@ -86,7 +87,7 @@ def get_platform():
         mac_version = ".".join(platform.mac_ver()[0].split(".")[:2])
         return f"macosx_{mac_version}_x86_64"
     elif sys.platform == "win32":
-        return "win_amd64"
+        return sysconfig.get_platform().replace("-", "_")
     else:
         raise ValueError("Unsupported platform: {}".format(sys.platform))
 
